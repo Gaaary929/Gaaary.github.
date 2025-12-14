@@ -1,15 +1,1246 @@
 <!DOCTYPE html>
-<html lang="zh-hans">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>数智教育平台 - 幼儿拼音学习</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Ma+Shan+Zheng&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4a6fa5;
+            --primary-light: #6b8cbc;
+            --primary-dark: #3a5984;
+            --secondary: #f9b233;
+            --secondary-light: #fbc55f;
+            --secondary-dark: #d9971a;
+            --accent: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
+            --success: #28a745;
+            --border-radius: 12px;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7fa;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .nav-active {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-bottom: 3px solid var(--secondary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* 主内容区 */
+        .hero {
+            padding: 4rem 0;
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8)), url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: var(--dark);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(249, 178, 51, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-light);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 111, 165, 0.2);
+        }
+
+        /* 功能模块 */
+        .features {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 5px solid var(--primary);
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        /* 拼音学习区 */
+        .pinyin-section {
+            padding: 5rem 0;
+            background-color: var(--gray-light);
+        }
+
+        .pinyin-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+        }
+
+        .pinyin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 20px;
+            margin-top: 2rem;
+        }
+
+        .pinyin-card {
+            background-color: var(--light);
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .pinyin-card:hover {
+            transform: scale(1.05);
+            border-color: var(--secondary);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .pinyin-card.active {
+            background-color: var(--secondary-light);
+            border-color: var(--secondary);
+        }
+
+        .pinyin-char {
+            font-size: 2.5rem;
+            font-family: 'Ma Shan Zheng', cursive;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .pinyin-pronunciation {
+            font-size: 1.3rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .pinyin-meaning {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* 视频资源区 */
+        .resources {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .video-container {
+            margin-top: 2rem;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+        }
+
+        .video-card {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-thumbnail {
+            height: 180px;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+            background-color: white;
+        }
+
+        .video-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-dark);
+        }
+
+        .video-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* 作业测验区 */
+        .quiz-section {
+            padding: 5rem 0;
+            background-color: var(--gray-light);
+        }
+
+        .quiz-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+        }
+
+        .quiz-question {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--primary-dark);
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-option {
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--gray-light);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary-light);
+            background-color: rgba(74, 111, 165, 0.05);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--secondary);
+            background-color: rgba(249, 178, 51, 0.1);
+        }
+
+        .quiz-option.correct {
+            border-color: var(--success);
+            background-color: rgba(40, 167, 69, 0.1);
+        }
+
+        .quiz-option.incorrect {
+            border-color: var(--accent);
+            background-color: rgba(231, 76, 60, 0.1);
+        }
+
+        .option-letter {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .quiz-result {
+            display: none;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .quiz-result.success {
+            background-color: rgba(40, 167, 69, 0.1);
+            border: 2px solid var(--success);
+            color: var(--success);
+            display: block;
+        }
+
+        .quiz-result.error {
+            background-color: rgba(231, 76, 60, 0.1);
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            display: block;
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-dark);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .hero h2 {
+                font-size: 1.9rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.7rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .pinyin-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+            
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .pinyin-container, .quiz-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>欢迎来到我的网页！</h1>
-    
-    <a href=" " target="_blank">
-        <button>点击这里跳转到百度官网</button>
-    </a >
+    <!-- 头部导航 -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>数智教育平台</h1>
+                        <p>幼儿拼音学习 | 免费教育资源</p>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav>
+                    <ul id="navMenu">
+                        <li><a href="#home" class="nav-active">首页</a></li>
+                        <li><a href="#features">平台特色</a></li>
+                        <li><a href="#pinyin">拼音学习</a></li>
+                        <li><a href="#resources">视频资源</a></li>
+                        <li><a href="#quiz">作业测验</a></li>
+                        <li><a href="#about">关于我们</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main>
+        <!-- 英雄区域 -->
+        <section class="hero" id="home">
+            <div class="container">
+                <h2>欢迎来到数智时代幼儿拼音学习平台</h2>
+                <p>本平台基于免费教育技术构建，整合了钉钉云盘、知乎、GitHub Pages等免费资源，为幼儿提供生动有趣的拼音学习体验。完全免费，可持续优化！</p>
+                
+                <div class="cta-buttons">
+                    <a href="#pinyin" class="btn btn-primary">
+                        <i class="fas fa-play-circle"></i> 开始学习
+                    </a>
+                    <a href="#quiz" class="btn btn-secondary">
+                        <i class="fas fa-tasks"></i> 立即测验
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 平台特色 -->
+        <section class="features" id="features">
+            <div class="container">
+                <div class="section-title">
+                    <h2>平台特色</h2>
+                    <p>整合多种免费技术资源，打造完整教育生态</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <h3>钉钉云盘存储</h3>
+                        <p>使用免费钉钉云盘存储多媒体资源，实现大文件高效访问，无需担心存储空间限制。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h3>GitHub Pages部署</h3>
+                        <p>通过GitHub Pages免费托管网站，支持持续更新与版本控制，实现可持续优化。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fab fa-zhihu"></i>
+                        </div>
+                        <h3>知乎平台推广</h3>
+                        <p>利用知乎平台发布教育内容，提高网站曝光度，让更多学习者受益。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>智能学习评测</h3>
+                        <p>基于数智思维的教育评测系统，实时反馈学习效果，个性化推荐学习路径。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 拼音学习区 -->
+        <section class="pinyin-section" id="pinyin">
+            <div class="container">
+                <div class="section-title">
+                    <h2>拼音学习</h2>
+                    <p>点击拼音卡片，学习发音与示例词汇</p>
+                </div>
+                
+                <div class="pinyin-container">
+                    <div class="pinyin-grid" id="pinyinGrid">
+                        <!-- 拼音卡片将通过JavaScript动态生成 -->
+                    </div>
+                    
+                    <div style="margin-top: 3rem; padding: 1.5rem; background-color: #f8f9fa; border-radius: 10px; display: none;" id="pinyinDetail">
+                        <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">拼音详情</h3>
+                        <div id="pinyinDetailContent">
+                            <p>选择一个拼音查看详细内容</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 视频资源区 -->
+        <section class="resources" id="resources">
+            <div class="container">
+                <div class="section-title">
+                    <h2>视频资源</h2>
+                    <p>多媒体学习资源来自钉钉云盘，实现高效访问</p>
+                </div>
+                
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <div class="video-info">
+                            <h4>拼音基础入门</h4>
+                            <p>学习拼音的基本发音规则和声调，适合零基础幼儿。</p>
+                            <a href="#" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">观看视频</a>
+                        </div>
+                    </div>
+                    
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <div class="video-info">
+                            <h4>声母韵母组合练习</h4>
+                            <p>掌握声母和韵母的组合方式，提高拼音拼读能力。</p>
+                            <a href="#" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">观看视频</a>
+                        </div>
+                    </div>
+                    
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <div class="video-info">
+                            <h4>拼音儿歌动画</h4>
+                            <p>通过生动有趣的儿歌动画，巩固拼音学习效果。</p>
+                            <a href="#" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">观看视频</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; text-align: center;">
+                    <p><strong>说明：</strong>实际视频资源存储在钉钉云盘，通过外链方式嵌入到网站中。点击"观看视频"将跳转到钉钉云盘播放页面。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 作业测验区 -->
+        <section class="quiz-section" id="quiz">
+            <div class="container">
+                <div class="section-title">
+                    <h2>作业测验</h2>
+                    <p>检验学习成果，实时获取反馈</p>
+                </div>
+                
+                <div class="quiz-container">
+                    <div class="quiz-question" id="quizQuestion">
+                        请选择拼音"bā"对应的汉字：
+                    </div>
+                    
+                    <div class="quiz-options" id="quizOptions">
+                        <!-- 选项将通过JavaScript动态生成 -->
+                    </div>
+                    
+                    <div style="display: flex; justify-content: center; gap: 15px;">
+                        <button class="btn btn-primary" id="submitQuiz">提交答案</button>
+                        <button class="btn btn-secondary" id="nextQuestion">下一题</button>
+                    </div>
+                    
+                    <div class="quiz-result" id="quizResult">
+                        <!-- 测验结果将在这里显示 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer id="about">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>关于平台</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem;">
+                        本平台是教育技术课程的实践项目，展示了如何利用免费资源构建完整的教育网站。
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-zhihu"></i></a>
+                        <a href="#"><i class="fas fa-cloud"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>技术栈</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">GitHub Pages 托管</a></li>
+                        <li><a href="#">钉钉云盘 存储</a></li>
+                        <li><a href="#">知乎平台 推广</a></li>
+                        <li><a href="#">VS Code 开发</a></li>
+                        <li><a href="#">HTML5/CSS3/JavaScript</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>学习资源</h3>
+                    <ul class="footer-links">
+                        <li><a href="#pinyin">拼音学习</a></li>
+                        <li><a href="#resources">视频资源</a></li>
+                        <li><a href="#quiz">作业测验</a></li>
+                        <li><a href="#">在线字典</a></li>
+                        <li><a href="#">学习社区</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>联系我们</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">课程指导老师</a></li>
+                        <li><a href="#">技术问题反馈</a></li>
+                        <li><a href="#">内容建议</a></li>
+                        <li><a href="#">合作机会</a></li>
+                        <li><a href="#">更新日志</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2025 数智教育平台 - 教育技术课程项目 | 基于免费资源构建 | 持续优化中</p>
+                <p style="margin-top: 10px; font-size: 0.8rem;">GitHub Pages托管 | 钉钉云盘存储 | 知乎平台推广</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 拼音数据
+        const pinyinData = [
+            { char: "ā", pronunciation: "a", tone: 1, example: "阿 姨 (ā yí)", meaning: "阿姨，妈妈" },
+            { char: "ō", pronunciation: "o", tone: 1, example: "喔 喔 (ō ō)", meaning: "公鸡叫声" },
+            { char: "ē", pronunciation: "e", tone: 1, example: "鹅 (é)", meaning: "一种家禽" },
+            { char: "ī", pronunciation: "i", tone: 1, example: "衣 服 (yī fu)", meaning: "穿在身上的" },
+            { char: "ū", pronunciation: "u", tone: 1, example: "乌 鸦 (wū yā)", meaning: "黑色鸟类" },
+            { char: "ǖ", pronunciation: "ü", tone: 1, example: "淤 泥 (yū ní)", meaning: "水底沉积物" },
+            { char: "bā", pronunciation: "ba", tone: 1, example: "八 (bā)", meaning: "数字8" },
+            { char: "pá", pronunciation: "pa", tone: 2, example: "爬 山 (pá shān)", meaning: "向上移动" },
+            { char: "mǎ", pronunciation: "ma", tone: 3, example: "马 (mǎ)", meaning: "一种动物" },
+            { char: "fà", pronunciation: "fa", tone: 4, example: "发 现 (fā xiàn)", meaning: "找到新事物" },
+            { char: "dé", pronunciation: "de", tone: 2, example: "得 到 (dé dào)", meaning: "获得" },
+            { char: "tù", pronunciation: "tu", tone: 4, example: "兔 子 (tù zi)", meaning: "一种动物" }
+        ];
+
+        // 测验数据
+        const quizData = [
+            {
+                question: "请选择拼音'bā'对应的汉字：",
+                options: ["爸", "八", "把", "巴"],
+                correct: 1
+            },
+            {
+                question: "拼音'mā'对应的汉字是：",
+                options: ["马", "麻", "妈", "骂"],
+                correct: 2
+            },
+            {
+                question: "下列哪个拼音的声调是第三声？",
+                options: ["bā", "pá", "mǎ", "fà"],
+                correct: 2
+            },
+            {
+                question: "拼音'tù'对应的动物是：",
+                options: ["兔", "鹿", "虎", "鼠"],
+                correct: 0
+            }
+        ];
+
+        // DOM元素
+        const pinyinGrid = document.getElementById('pinyinGrid');
+        const pinyinDetail = document.getElementById('pinyinDetail');
+        const pinyinDetailContent = document.getElementById('pinyinDetailContent');
+        const quizQuestion = document.getElementById('quizQuestion');
+        const quizOptions = document.getElementById('quizOptions');
+        const submitQuizBtn = document.getElementById('submitQuiz');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const quizResult = document.getElementById('quizResult');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        // 当前测验索引
+        let currentQuizIndex = 0;
+        let selectedOption = null;
+
+        // 初始化拼音卡片
+        function initPinyinCards() {
+            pinyinGrid.innerHTML = '';
+            
+            pinyinData.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'pinyin-card';
+                card.dataset.index = index;
+                
+                card.innerHTML = `
+                    <div class="pinyin-char">${item.char}</div>
+                    <div class="pinyin-pronunciation">${item.pronunciation}</div>
+                    <div class="pinyin-meaning">${item.example.split(' ')[0]}</div>
+                `;
+                
+                card.addEventListener('click', () => {
+                    // 移除所有卡片的active类
+                    document.querySelectorAll('.pinyin-card').forEach(c => {
+                        c.classList.remove('active');
+                    });
+                    
+                    // 为当前卡片添加active类
+                    card.classList.add('active');
+                    
+                    // 显示拼音详情
+                    showPinyinDetail(index);
+                });
+                
+                pinyinGrid.appendChild(card);
+            });
+        }
+
+        // 显示拼音详情
+        function showPinyinDetail(index) {
+            const item = pinyinData[index];
+            
+            pinyinDetailContent.innerHTML = `
+                <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                    <div style="font-size: 3.5rem; font-family: 'Ma Shan Zheng', cursive; color: var(--primary-dark); margin-right: 1.5rem;">${item.char}</div>
+                    <div>
+                        <div style="font-size: 1.8rem; color: var(--accent); font-weight: bold;">${item.pronunciation}</div>
+                        <div style="color: var(--gray);">第${item.tone}声</div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <strong>示例词汇：</strong> ${item.example}
+                </div>
+                <div>
+                    <strong>含义：</strong> ${item.meaning}
+                </div>
+                <div style="margin-top: 1.5rem; padding: 1rem; background-color: #e9f5ff; border-radius: 8px;">
+                    <i class="fas fa-volume-up" style="color: var(--primary); margin-right: 10px;"></i>
+                    <strong>发音提示：</strong> 点击右侧喇叭图标听发音
+                    <button class="btn btn-secondary" style="padding: 5px 15px; float: right; font-size: 0.9rem;">
+                        <i class="fas fa-volume-up"></i> 播放发音
+                    </button>
+                </div>
+            `;
+            
+            pinyinDetail.style.display = 'block';
+            
+            // 滚动到详情区域
+            pinyinDetail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // 初始化测验
+        function initQuiz() {
+            loadQuizQuestion(currentQuizIndex);
+            
+            submitQuizBtn.addEventListener('click', submitQuiz);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+        }
+
+        // 加载测验问题
+        function loadQuizQuestion(index) {
+            const quiz = quizData[index];
+            quizQuestion.textContent = quiz.question;
+            quizOptions.innerHTML = '';
+            selectedOption = null;
+            quizResult.style.display = 'none';
+            
+            // 重置按钮状态
+            submitQuizBtn.disabled = false;
+            submitQuizBtn.textContent = '提交答案';
+            nextQuestionBtn.style.display = 'none';
+            
+            // 创建选项
+            quiz.options.forEach((option, i) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'quiz-option';
+                optionElement.dataset.index = i;
+                
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + i)}</div>
+                    <div>${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => {
+                    // 移除之前的选择
+                    document.querySelectorAll('.quiz-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // 标记当前选择
+                    optionElement.classList.add('selected');
+                    selectedOption = i;
+                });
+                
+                quizOptions.appendChild(optionElement);
+            });
+        }
+
+        // 提交测验答案
+        function submitQuiz() {
+            if (selectedOption === null) {
+                alert('请先选择一个答案！');
+                return;
+            }
+            
+            const quiz = quizData[currentQuizIndex];
+            const isCorrect = selectedOption === quiz.correct;
+            
+            // 显示结果
+            if (isCorrect) {
+                quizResult.className = 'quiz-result success';
+                quizResult.innerHTML = `
+                    <i class="fas fa-check-circle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <h3>回答正确！</h3>
+                    <p>恭喜你，答对了！拼音"${quiz.options[quiz.correct]}"对应的拼音是正确的。</p>
+                `;
+            } else {
+                quizResult.className = 'quiz-result error';
+                quizResult.innerHTML = `
+                    <i class="fas fa-times-circle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <h3>回答错误！</h3>
+                    <p>正确答案是：${quiz.options[quiz.correct]}</p>
+                    <p>再仔细想一想，你可以的！</p>
+                `;
+            }
+            
+            quizResult.style.display = 'block';
+            
+            // 标记正确和错误的选项
+            document.querySelectorAll('.quiz-option').forEach((opt, i) => {
+                if (i === quiz.correct) {
+                    opt.classList.add('correct');
+                } else if (i === selectedOption) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            
+            // 禁用提交按钮，显示下一题按钮
+            submitQuizBtn.disabled = true;
+            submitQuizBtn.textContent = '已提交';
+            nextQuestionBtn.style.display = 'inline-flex';
+        }
+
+        // 下一题
+        function nextQuestion() {
+            currentQuizIndex = (currentQuizIndex + 1) % quizData.length;
+            loadQuizQuestion(currentQuizIndex);
+        }
+
+        // 移动端菜单切换
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            
+            // 切换菜单图标
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // 导航链接点击事件
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                // 如果是锚点链接
+                if (link.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    
+                    // 更新活动导航项
+                    document.querySelectorAll('nav a').forEach(a => {
+                        a.classList.remove('nav-active');
+                    });
+                    link.classList.add('nav-active');
+                    
+                    // 关闭移动端菜单
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+                    }
+                    
+                    // 滚动到对应部分
+                    const targetId = link.getAttribute('href');
+                    if (targetId !== '#') {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                }
+            });
+        });
+
+        // 监听滚动，更新导航活动状态
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section, footer');
+            const scrollPos = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight && sectionId) {
+                    document.querySelectorAll('nav a').forEach(link => {
+                        link.classList.remove('nav-active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('nav-active');
+                        }
+                    });
+                }
+            });
+        });
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            initPinyinCards();
+            initQuiz();
+            
+            // 默认显示第一个拼音的详情
+            showPinyinDetail(0);
+            document.querySelector('.pinyin-card').classList.add('active');
+            
+            // 模拟钉钉云盘视频链接
+            document.querySelectorAll('.video-card a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alert('在实际部署中，这里会跳转到钉钉云盘的视频播放页面。\n\n视频资源存储在钉钉云盘，通过外链方式嵌入到网站中。');
+                });
+            });
+            
+            // 模拟在线字典功能
+            const dictionaryLinks = document.querySelectorAll('.footer-links a[href="#"]');
+            dictionaryLinks.forEach(link => {
+                if (link.textContent.includes('字典')) {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        alert('在实际部署中，这里会调用在线中英新华字典API。\n\n建议参考: https://www.xhzidian.com/english');
+                    });
+                }
+            });
+            
+            // 添加GitHub Pages部署说明
+            const deployNote = document.createElement('div');
+            deployNote.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--primary-dark);
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                z-index: 1000;
+                max-width: 300px;
+                display: none;
+            `;
+            deployNote.innerHTML = `
+                <strong><i class="fas fa-info-circle"></i> GitHub Pages部署说明</strong>
+                <p style="margin-top: 8px; font-size: 0.85rem;">将此HTML文件上传到GitHub仓库，启用GitHub Pages服务即可免费部署。</p>
+                <button id="closeNote" style="background: transparent; border: none; color: white; position: absolute; top: 5px; right: 5px; cursor: pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            document.body.appendChild(deployNote);
+            
+            // 显示/隐藏部署说明
+            const infoBtn = document.createElement('button');
+            infoBtn.innerHTML = '<i class="fas fa-info"></i>';
+            infoBtn.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: var(--primary);
+                color: white;
+                border: none;
+                font-size: 1.2rem;
+                cursor: pointer;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+                z-index: 999;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+            document.body.appendChild(infoBtn);
+            
+            infoBtn.addEventListener('click', () => {
+                deployNote.style.display = deployNote.style.display === 'block' ? 'none' : 'block';
+            });
+            
+            document.getElementById('closeNote').addEventListener('click', () => {
+                deployNote.style.display = 'none';
+            });
+        });
+    </script>
 </body>
 </html>
