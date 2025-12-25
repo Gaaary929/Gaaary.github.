@@ -21,6 +21,8 @@
             --secondary-light: #fbc55f;
             --secondary-dark: #d9971a;
             --accent: #e74c3c;
+            --ai-color: #6e48aa;
+            --ai-light: #9d65c9;
             --light: #f8f9fa;
             --dark: #343a40;
             --gray: #6c757d;
@@ -187,6 +189,18 @@
             box-shadow: 0 8px 20px rgba(74, 111, 165, 0.2);
         }
 
+        .btn-ai {
+            background: linear-gradient(135deg, var(--ai-color) 0%, #4a148c 100%);
+            color: white;
+            border: none;
+        }
+
+        .btn-ai:hover {
+            background: linear-gradient(135deg, var(--ai-light) 0%, var(--ai-color) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(110, 72, 170, 0.3);
+        }
+
         /* 功能模块 */
         .features {
             padding: 5rem 0;
@@ -216,6 +230,10 @@
             height: 4px;
             background-color: var(--secondary);
             border-radius: 2px;
+        }
+
+        .section-title.ai-title h2::after {
+            background-color: var(--ai-color);
         }
 
         .section-title p {
@@ -381,6 +399,142 @@
         .video-info p {
             color: var(--gray);
             font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* AI智能辅导模块 */
+        .ai-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #eef2f7 100%);
+        }
+
+        .ai-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+            border-top: 5px solid var(--ai-color);
+        }
+
+        .ai-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 2.5rem 0;
+        }
+
+        .ai-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 1.5rem;
+            background-color: rgba(110, 72, 170, 0.05);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .ai-feature:hover {
+            background-color: rgba(110, 72, 170, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .ai-feature-icon {
+            font-size: 1.8rem;
+            color: var(--ai-color);
+            min-width: 50px;
+            height: 50px;
+            background-color: rgba(110, 72, 170, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ai-feature-content h4 {
+            font-size: 1.2rem;
+            color: var(--ai-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .ai-feature-content p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .ai-demo {
+            background: linear-gradient(135deg, rgba(110, 72, 170, 0.05) 0%, rgba(74, 20, 140, 0.05) 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .ai-demo h3 {
+            color: var(--ai-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .ai-message {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--ai-color);
+        }
+
+        .ai-message.user {
+            border-left-color: var(--primary);
+        }
+
+        .ai-message-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .ai-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .ai-avatar.ai {
+            background: linear-gradient(135deg, var(--ai-color) 0%, #4a148c 100%);
+        }
+
+        .ai-avatar.user {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+
+        .ai-message-header h4 {
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+
+        .ai-message-content {
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .ai-link-box {
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 12px;
+            border: 2px dashed rgba(110, 72, 170, 0.3);
+            margin-top: 2rem;
+        }
+
+        .ai-link-box h3 {
+            color: var(--ai-color);
             margin-bottom: 1rem;
         }
 
@@ -596,6 +750,14 @@
             .section-title h2 {
                 font-size: 1.7rem;
             }
+            
+            .ai-container {
+                padding: 2rem;
+            }
+            
+            .ai-features {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 576px) {
@@ -608,6 +770,10 @@
             }
             
             .pinyin-container, .quiz-container {
+                padding: 1.5rem;
+            }
+            
+            .ai-container {
                 padding: 1.5rem;
             }
         }
@@ -638,6 +804,7 @@
                         <li><a href="#features">平台特色</a></li>
                         <li><a href="#pinyin">拼音学习</a></li>
                         <li><a href="#resources">视频资源</a></li>
+                        <li><a href="#ai-tutor">AI辅导</a></li>
                         <li><a href="#quiz">作业测验</a></li>
                         <li><a href="#about">关于我们</a></li>
                     </ul>
@@ -652,14 +819,14 @@
         <section class="hero" id="home">
             <div class="container">
                 <h2>欢迎来到数智时代幼儿拼音学习平台</h2>
-                <p>本平台基于免费教育技术构建，整合了钉钉云盘、知乎、GitHub Pages等免费资源，为幼儿提供生动有趣的拼音学习体验。完全免费，可持续优化！</p>
+                <p>本平台基于免费教育技术构建，整合了阿里云盘、知乎、GitHub Pages等免费资源，为幼儿提供生动有趣的拼音学习体验。完全免费，可持续优化！</p>
                 
                 <div class="cta-buttons">
                     <a href="#pinyin" class="btn btn-primary">
                         <i class="fas fa-play-circle"></i> 开始学习
                     </a>
-                    <a href="#quiz" class="btn btn-secondary">
-                        <i class="fas fa-tasks"></i> 立即测验
+                    <a href="#ai-tutor" class="btn btn-ai">
+                        <i class="fas fa-robot"></i> AI智能辅导
                     </a>
                 </div>
             </div>
@@ -678,8 +845,8 @@
                         <div class="feature-icon">
                             <i class="fas fa-cloud-upload-alt"></i>
                         </div>
-                        <h3>钉钉云盘存储</h3>
-                        <p>使用免费钉钉云盘存储多媒体资源，实现大文件高效访问，无需担心存储空间限制。</p>
+                        <h3>阿里云盘存储</h3>
+                        <p>使用免费阿里云盘存储多媒体资源，实现大文件高效访问，无需担心存储空间限制。</p>
                     </div>
                     
                     <div class="feature-card">
@@ -737,7 +904,7 @@
             <div class="container">
                 <div class="section-title">
                     <h2>视频资源</h2>
-                    <p>多媒体学习资源来自钉钉云盘，实现高效访问</p>
+                    <p>多媒体学习资源来自阿里云盘，实现高效访问</p>
                 </div>
                 
                 <div class="video-grid">
@@ -747,7 +914,7 @@
                         </div>
                         <div class="video-info">
                             <h4>拼音基础入门</h4>
-                            <p>学习拼音的基本发音规则和声调，适合零基础幼儿。</p>
+                            <p>学习拼音的基本发音规则和声调，适合零基础。</p>
                             <a href="https://www.alipan.com/s/ZPiDgyTrGjP" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">观看视频</a>
                         </div>
                     </div>
@@ -772,6 +939,120 @@
                             <p>通过生动有趣的儿歌动画，巩固拼音学习效果。</p>
                             <a href="https://www.alipan.com/s/W4v6mCZ5juE" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">观看视频</a>
                         </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; text-align: center;">
+                    <p><strong>说明：</strong>实际视频资源存储在阿里云盘，通过外链方式嵌入到网站中。点击"观看视频"将跳转到阿里云盘播放页面。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI智能辅导模块 - 新增部分 -->
+        <section class="ai-section" id="ai-tutor">
+            <div class="container">
+                <div class="section-title ai-title">
+                    <h2>AI智能辅导</h2>
+                    <p>基于大语言模型的智能辅导系统，为每个学习者提供个性化支持</p>
+                </div>
+                
+                <div class="ai-container">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <h3 style="color: var(--ai-color); font-size: 1.8rem; margin-bottom: 1rem;">豆包AI智能助手</h3>
+                        <p style="color: var(--gray); max-width: 800px; margin: 0 auto;">
+                            我们集成了先进的豆包AI大语言模型，为幼儿拼音学习提供智能辅导、答疑解惑、学习建议等全方位支持。
+                        </p>
+                    </div>
+                    
+                    <div class="ai-features">
+                        <div class="ai-feature">
+                            <div class="ai-feature-icon">
+                                <i class="fas fa-comment-dots"></i>
+                            </div>
+                            <div class="ai-feature-content">
+                                <h4>智能答疑</h4>
+                                <p>24小时解答拼音学习中的疑问，提供详细解释和示例。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="ai-feature">
+                            <div class="ai-feature-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <div class="ai-feature-content">
+                                <h4>个性化练习</h4>
+                                <p>根据学习进度和能力，生成定制化的拼音练习题目。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="ai-feature">
+                            <div class="ai-feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="ai-feature-content">
+                                <h4>学习分析</h4>
+                                <p>分析学习数据，提供学习建议和改进方案。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="ai-feature">
+                            <div class="ai-feature-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div class="ai-feature-content">
+                                <h4>互动学习</h4>
+                                <p>通过游戏化互动方式，提高学习兴趣和参与度。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-demo">
+                        <h3>AI辅导示例对话</h3>
+                        
+                        <div class="ai-message user">
+                            <div class="ai-message-header">
+                                <div class="ai-avatar user">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <h4>学生提问</h4>
+                            </div>
+                            <div class="ai-message-content">
+                                "老师，拼音'b'和'p'的发音有什么区别？我总是分不清。"
+                            </div>
+                        </div>
+                        
+                        <div class="ai-message">
+                            <div class="ai-message-header">
+                                <div class="ai-avatar ai">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <h4>AI助手回答</h4>
+                            </div>
+                            <div class="ai-message-content">
+                                "b'和'p'的主要区别在于送气程度。'b'是不送气音，发音时气流较弱，比如'爸(bà)'；'p'是送气音，发音时气流较强，比如'怕(pà)'。你可以把手放在嘴前感受一下：发'p'时能明显感觉到气流，发'b'时则不明显。试试看！"
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 豆包AI链接 -->
+                    <div class="ai-link-box">
+                        <h3>立即体验AI智能辅导</h3>
+                        <p style="color: var(--gray); margin-bottom: 1.5rem;">点击下方按钮，跳转到豆包AI平台，开启智能学习之旅</p>
+                        <a href="https://www.doubao.com/chat" target="_blank" class="btn btn-ai" style="font-size: 1.2rem; padding: 15px 40px;">
+                            <i class="fas fa-external-link-alt"></i> 前往豆包AI智能助手
+                        </a>
+                        <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--gray);">
+                            * 豆包AI是字节跳动开发的大语言模型，提供免费AI对话服务
+                        </p>
+                    </div>
+                    
+                    <div style="margin-top: 2rem; padding: 1.5rem; background-color: rgba(110, 72, 170, 0.05); border-radius: 10px;">
+                        <h4 style="color: var(--ai-color); margin-bottom: 1rem;"><i class="fas fa-lightbulb"></i> AI教育应用思考</h4>
+                        <p style="color: var(--dark);">
+                            在数智时代，e-LLM(教育大语言模型)的应用为个性化教育提供了新可能。通过AI智能体(e-Agent)，
+                            我们可以为每个学习者提供定制化的学习路径、实时反馈和智能辅导，实现"因材施教"的教育理想。
+                            本模块展示了如何将第三方AI服务集成到教育平台中，为教育技术发展提供实践参考。
+                        </p>
                     </div>
                 </div>
             </div>
@@ -820,7 +1101,7 @@
                         <a href="#"><i class="fab fa-github"></i></a>
                         <a href="#"><i class="fab fa-zhihu"></i></a>
                         <a href="#"><i class="fas fa-cloud"></i></a>
-                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fas fa-robot"></i></a>
                     </div>
                 </div>
                 
@@ -828,9 +1109,9 @@
                     <h3>技术栈</h3>
                     <ul class="footer-links">
                         <li><a href="#">GitHub Pages 托管</a></li>
-                        <li><a href="#">钉钉云盘 存储</a></li>
-                        <li><a href="#">知乎平台 推广</a></li>
-                        <li><a href="#">VS Code 开发</a></li>
+                        <li><a href="https://www.dingtalk.com/">阿里云盘 存储</a></li>
+                        <li><a href="https://www.zhihu.com/">知乎平台 推广</a></li>
+                        <li><a href="https://www.doubao.com/chat">豆包AI 智能辅导</a></li>
                         <li><a href="#">HTML5/CSS3/JavaScript</a></li>
                     </ul>
                 </div>
@@ -840,8 +1121,8 @@
                     <ul class="footer-links">
                         <li><a href="#pinyin">拼音学习</a></li>
                         <li><a href="#resources">视频资源</a></li>
+                        <li><a href="#ai-tutor">AI智能辅导</a></li>
                         <li><a href="#quiz">作业测验</a></li>
-                        <li><a href="#">在线字典</a></li>
                         <li><a href="#">学习社区</a></li>
                     </ul>
                 </div>
@@ -860,7 +1141,7 @@
             
             <div class="copyright">
                 <p>© 2025 数智教育平台 - 教育技术课程项目 | 基于免费资源构建 | 持续优化中</p>
-                <p style="margin-top: 10px; font-size: 0.8rem;">GitHub Pages托管 | 钉钉云盘存储 | 知乎平台推广</p>
+                <p style="margin-top: 10px; font-size: 0.8rem;">GitHub Pages托管 | 阿里云盘存储 | 知乎平台推广 | 豆包AI智能辅导</p>
             </div>
         </div>
     </footer>
@@ -979,6 +1260,13 @@
                         <i class="fas fa-volume-up"></i> 播放发音
                     </button>
                 </div>
+                <div style="margin-top: 1.5rem; padding: 1rem; background-color: rgba(110, 72, 170, 0.05); border-radius: 8px;">
+                    <i class="fas fa-robot" style="color: var(--ai-color); margin-right: 10px;"></i>
+                    <strong>AI学习建议：</strong> 关于拼音"${item.char}"的学习，可以咨询豆包AI助手获取更多学习技巧
+                    <a href="https://www.doubao.com/chat" target="_blank" class="btn btn-ai" style="padding: 5px 15px; float: right; font-size: 0.9rem;">
+                        <i class="fas fa-external-link-alt"></i> 咨询AI
+                    </a>
+                </div>
             `;
             
             pinyinDetail.style.display = 'block';
@@ -1051,6 +1339,9 @@
                     <i class="fas fa-check-circle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
                     <h3>回答正确！</h3>
                     <p>恭喜你，答对了！拼音"${quiz.options[quiz.correct]}"对应的拼音是正确的。</p>
+                    <div style="margin-top: 1rem;">
+                        <p style="font-size: 0.9rem;"><i class="fas fa-robot" style="color: var(--ai-color);"></i> <strong>AI学习建议：</strong> 你已经掌握了这个知识点，可以咨询豆包AI助手挑战更难的题目。</p>
+                    </div>
                 `;
             } else {
                 quizResult.className = 'quiz-result error';
@@ -1059,6 +1350,12 @@
                     <h3>回答错误！</h3>
                     <p>正确答案是：${quiz.options[quiz.correct]}</p>
                     <p>再仔细想一想，你可以的！</p>
+                    <div style="margin-top: 1rem;">
+                        <p style="font-size: 0.9rem;"><i class="fas fa-robot" style="color: var(--ai-color);"></i> <strong>AI学习建议：</strong> 这个知识点需要加强，可以咨询豆包AI助手获取详细解释和更多练习。</p>
+                        <a href="https://www.doubao.com/chat" target="_blank" class="btn btn-ai" style="padding: 8px 16px; margin-top: 10px; font-size: 0.9rem;">
+                            <i class="fas fa-external-link-alt"></i> 寻求AI帮助
+                        </a>
+                    </div>
                 `;
             }
             
@@ -1161,7 +1458,14 @@
             // 默认显示第一个拼音的详情
             showPinyinDetail(0);
             document.querySelector('.pinyin-card').classList.add('active');
-             
+            
+            // 模拟阿里云盘视频链接
+            //document.querySelectorAll('.video-card a').forEach(link => {
+            //    link.addEventListener('click', (e) => {
+            //        e.preventDefault();
+            //        alert('在实际部署中，这里会跳转到阿里云盘的视频播放页面。\n\n视频资源存储在阿里云盘，通过外链方式嵌入到网站中。');
+            //    });
+            //});
             
             // 模拟在线字典功能
             const dictionaryLinks = document.querySelectorAll('.footer-links a[href="#"]');
@@ -1191,8 +1495,8 @@
                 display: none;
             `;
             deployNote.innerHTML = `
-                <strong><i class="fas fa-info-circle"></i> GitHub Pages部署说明</strong>
-                <p style="margin-top: 8px; font-size: 0.85rem;">将此HTML文件上传到GitHub仓库，启用GitHub Pages服务即可免费部署。</p>
+                <strong><i class="fas fa-info-circle"></i> 免费教育平台部署说明</strong>
+                <p style="margin-top: 8px; font-size: 0.85rem;">本平台整合：GitHub Pages(托管) + 阿里云盘(存储) + 知乎(推广) + 豆包AI(智能辅导)</p>
                 <button id="closeNote" style="background: transparent; border: none; color: white; position: absolute; top: 5px; right: 5px; cursor: pointer;">
                     <i class="fas fa-times"></i>
                 </button>
